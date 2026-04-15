@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ANSHU | Portfolio</title>
+    <style>
+        :root {
+            color-scheme: dark;
+            font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            color: #111;
+            background: #f8f8f8;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            min-height: 100vh;
+            overflow-x: hidden;
+            background: #fafafa;
+        }
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+        button {
+            font: inherit;
+            cursor: pointer;
+        }
+        .page {
+            width: min(1200px, 100% - 2rem);
+            margin: 0 auto;
+            padding: 2rem 0 4rem;
+        }
+        .topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+        .brand-icon {
+            width: 2rem;
+            height: 2rem;
+            border: 2px solid #111;
+            border-radius: 999px;
+            display: grid;
+            place-items: center;
+            font-size: 1.1rem;
+        }
+        .button-primary {
+            padding: 0.95rem 1.6rem;
+            border-radius: 999px;
+            border: 1px solid #111;
+            background: #111;
+            color: #fff;
+            transition: transform 0.25s ease, background 0.25s ease;
+        }
+        .button-primary:hover {
+            transform: translateY(-2px);
+            background: #000;
+        }
+        .hero {
+            display: grid;
+            grid-template-columns: minmax(0, 1.2fr) minmax(320px, 1fr);
+            gap: 2rem;
+            align-items: center;
+            margin-bottom: 3rem;
+        }
+        .hero-copy {
+            display: grid;
+            gap: 1.4rem;
+        }
+        .label-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.85rem 1rem;
+            background: #fff;
+            border: 1px solid #111;
+            border-radius: 999px;
+            width: fit-content;
+            font-size: 0.9rem;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+        }
+        .hero-title {
+            font-size: clamp(3rem, 5vw, 5.5rem);
+            line-height: 0.95;
+            font-weight: 800;
+            letter-spacing: -0.06em;
+            max-width: 11ch;
+        }
+        .hero-text {
+            max-width: 45rem;
+            color: #333;
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+        .hero-copy > * {
+            opacity: 0;
+            transform: translateY(24px);
+            animation: fadeInUp 0.9s ease forwards;
+        }
+        .hero-copy > *:nth-child(1) { animation-delay: 0.15s; }
+        .hero-copy > *:nth-child(2) { animation-delay: 0.3s; }
+        .hero-copy > *:nth-child(3) { animation-delay: 0.45s; }
+        .hero-copy > *:nth-child(4) { animation-delay: 0.6s; }
+        .hero-meta {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1rem;
+            margin-top: 1.8rem;
+        }
+        .hero-image img {
+            width: 100%;
+            display: block;
+            aspect-ratio: 4 / 5;
+            object-fit: cover;
+            animation: float 6s ease-in-out infinite;
+        }
+        .hero-image .profile-card {
+            position: relative;
+            display: grid;
+            gap: 1rem;
+            padding: 1.5rem;
+            min-height: 24rem;
+            animation: float 5.5s ease-in-out infinite;
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(24px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .hero-card {
+            border: 1px solid #d7d7d7;
+            padding: 1.5rem;
+            border-radius: 2rem;
+            background: #fff;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+        }
+        .hero-card h3 {
+            margin-bottom: 0.4rem;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: #111;
+        }
+        .hero-card span {
+            display: block;
+            margin-top: 0.65rem;
+            font-size: 0.95rem;
+            color: #555;
+        }
+        .hero-image {
+            display: grid;
+            gap: 1rem;
+        }
+        .hero-image > div,
+        .hero-image img {
+            border-radius: 1.5rem;
+            background: #fff;
+            border: 1px solid #d7d7d7;
+        }
+        .hero-image .profile-card {
+            position: relative;
+            display: grid;
+            gap: 1rem;
+            padding: 1.5rem;
+            min-height: 24rem;
+            animation: float 5.5s ease-in-out infinite;
+        }
+        .hero-image .profile-card h2 {
+            margin-top: auto;
+            font-size: 1.4rem;
+            line-height: 1.1;
+        }
+        .hero-image .profile-card p {
+            color: #555;
+            font-size: 0.95rem;
+        }
+        .hero-image .badge {
+            position: absolute;
+            top: 1.5rem;
+            left: 1.5rem;
+            background: #111;
+            color: #fff;
+            padding: 0.75rem 1rem;
+            border-radius: 999px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+        .section-grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+        .section-grid.two {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+        .section-grid.four {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+        .section-card {
+            background: #fff;
+            border-radius: 2rem;
+            padding: 2rem;
+            border: 1px solid #e6e6e6;
+            box-shadow: 0 18px 36px rgba(0,0,0,0.04);
+            min-height: 14rem;
+        }
+        .section-card h3 {
+            margin-bottom: 0.9rem;
+            font-size: 1.25rem;
+        }
+        .section-card p {
+            color: #4d4d4d;
+            line-height: 1.8;
+        }
+        .section-intro {
+            display: grid;
+            place-items: center;
+            text-align: left;
+        }
+        .section-intro h2 {
+            max-width: 20ch;
+            font-size: clamp(2.2rem, 4vw, 3.5rem);
+            margin-bottom: 1rem;
+        }
+        .section-intro p {
+            color: #555;
+            font-size: 1rem;
+            line-height: 1.8;
+            max-width: 42rem;
+        }
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 1.5rem;
+        }
+        .project-block {
+            padding: 1.75rem;
+            border-radius: 1.8rem;
+            background: #fff;
+            border: 1px solid #e8e8e8;
+        }
+        .project-block h3 {
+            margin-bottom: 1rem;
+            font-size: 1.15rem;
+        }
+        .project-block p {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 1.25rem;
+        }
+        .project-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            color: #777;
+            font-size: 0.95rem;
+        }
+        .highlight-panel {
+            background: #111;
+            color: #fff;
+            border-radius: 2rem;
+            padding: 3rem 2rem;
+            box-shadow: 0 18px 40px rgba(0,0,0,0.15);
+            grid-column: span 2;
+        }
+        .highlight-panel h2 {
+            font-size: clamp(2rem, 3vw, 3.25rem);
+            margin-bottom: 1rem;
+            line-height: 1.05;
+        }
+        .highlight-panel p {
+            color: #ddd;
+            line-height: 1.8;
+            max-width: 54rem;
+        }
+        .experience-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1.5rem;
+        }
+        .experience-card {
+            background: #fff;
+            border-radius: 2rem;
+            padding: 2rem;
+            border: 1px solid #eaeaea;
+        }
+        .experience-card h3 {
+            margin-bottom: 0.75rem;
+            font-size: 1.15rem;
+        }
+        .experience-card span {
+            display: block;
+            color: #888;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+        .experience-card p {
+            color: #555;
+            line-height: 1.75;
+        }
+        .action-card {
+            background: #fff;
+            border-radius: 2rem;
+            padding: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border: 1px solid #e6e6e6;
+        }
+        .action-card h2 {
+            margin-bottom: 1rem;
+            font-size: clamp(2rem, 3vw, 3rem);
+        }
+        .action-card button {
+            width: fit-content;
+            background: #111;
+            color: #fff;
+            border-radius: 999px;
+            padding: 1rem 1.6rem;
+            border: none;
+            margin-top: 1rem;
+        }
+        .contact-panel {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 1.5rem;
+        }
+        .contact-panel .form-card,
+        .contact-panel .social-card {
+            background: #fff;
+            border-radius: 2rem;
+            padding: 2rem;
+            border: 1px solid #eaeaea;
+        }
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        .field,
+        .message-field {
+            width: 100%;
+            border: 1px solid #d6d6d6;
+            border-radius: 1.2rem;
+            padding: 1rem 1.2rem;
+            background: #fbfbfb;
+            font-size: 0.95rem;
+        }
+        .message-field {
+            min-height: 12rem;
+            resize: vertical;
+            grid-column: span 2;
+        }
+        .submit-row {
+            margin-top: 1rem;
+        }
+        .submit-row button {
+            width: 100%;
+            padding: 1rem 1.2rem;
+            background: #111;
+            color: #fff;
+            border-radius: 999px;
+            border: none;
+        }
+        .social-card {
+            display: grid;
+            gap: 1rem;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        .social-card h3 {
+            margin-bottom: 0.75rem;
+            font-size: 1.25rem;
+        }
+        .social-list {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1rem;
+        }
+        .social-pill {
+            border: 1px solid #111;
+            border-radius: 999px;
+            padding: 1rem 1.2rem;
+            background: #fff;
+            transition: background 0.2s ease, color 0.2s ease;
+        }
+        .social-pill svg {
+            width: 1rem;
+            height: 1rem;
+            vertical-align: middle;
+            margin-right: 0.5rem;
+        }
+        .social-pill svg path {
+            stroke: currentColor;
+        }
+        .social-pill:hover {
+            background: #111;
+            color: #fff;
+        }
+        .footer-bar {
+            margin-top: 3rem;
+            padding: 1.5rem 2rem;
+            border-radius: 2rem;
+            background: #fff;
+            border: 1px solid #eaeaea;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            box-shadow: 0 18px 35px rgba(0,0,0,0.05);
+        }
+        .footer-bar span {
+            color: #555;
+        }
+        @media (max-width: 980px) {
+            .hero,
+            .section-grid.two,
+            .section-grid.four,
+            .experience-grid,
+            .contact-panel,
+            .footer-bar {
+                grid-template-columns: 1fr;
+            }
+            .hero {
+                align-items: start;
+            }
+            .hero-meta {
+                grid-template-columns: 1fr;
+            }
+            .highlight-panel {
+                grid-column: auto;
+            }
+        }
+        @media (max-width: 640px) {
+            .topbar,
+            .hero-copy,
+            .hero-image,
+            .hero-meta,
+            .hero-title,
+            .label-pill,
+            .button-primary {
+                width: 100%;
+            }
+            .hero-title {
+                font-size: 3.3rem;
+            }
+            .hero-image .profile-card {
+                min-height: auto;
+            }
+            .form-row,
+            .social-list {
+                grid-template-columns: 1fr;
+            }
+            .highlight-panel,
+            .section-card,
+            .project-block,
+            .experience-card,
+            .action-card,
+            .contact-panel > div {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="page">
+        <section class="topbar">
+            <div class="brand"><span class="brand-icon">A</span>ANSHU</div>
+            <a class="button-primary" href="#contact">Book a call</a>
+        </section>
+
+        <section class="hero">
+            <div class="hero-copy">
+                <div class="label-pill">Full-Stack Web Developer</div>
+                <h1 class="hero-title">Hi, I'm a full-stack web developer</h1>
+                <p class="hero-text">I build powerful, beautiful web applications from frontend to backend with clean code, fast performance, and modern interactions.</p>
+                <div class="hero-meta">
+                    <div class="hero-card">
+                        <h3>Experience</h3>
+                        <span>7+ years building web products</span>
+                    </div>
+                    <div class="hero-card">
+                        <h3>Stack</h3>
+                        <span>React · Node · Express · MongoDB</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="profile-card">
+                    <div class="badge">Portfolio</div>
+                    <h2>Full Stack Developer</h2>
+                    <p>Transforming ideas into efficient, responsive applications with clean interfaces and seamless data flow.</p>
+                </div>
+                <img src="image/photo.jpeg" alt="Personal profile photo">
+            </div>
+        </section>
+
+        <section class="section-grid two">
+            <div class="section-card">
+                <h3>UI Design</h3>
+                <p>We create intuitive, visually appealing interfaces that enhance user experience and navigation, ensuring your app is both beautiful and functional across all devices.</p>
+            </div>
+            <div class="section-card">
+                <h3>Development</h3>
+                <p>Our team builds reliable, scalable solutions, delivering clean code that powers websites and mobile apps with top-notch performance and security.</p>
+            </div>
+            <div class="section-card">
+                <h3>Graphic Design</h3>
+                <p>We design responsive, user-friendly websites that blend aesthetics with functionality, providing a seamless experience across devices and reflecting your brand’s identity.</p>
+            </div>
+            <div class="section-card">
+                <h3>Branding</h3>
+                <p>We craft memorable brand identities, from logos to complete strategies, ensuring consistency and a strong emotional connection with your audience.</p>
+            </div>
+        </section>
+
+        <section class="highlight-panel">
+            <h2>My mission is to assist startups and enterprises in creating an emotional bond between their products and satisfied, engaged customers.</h2>
+            <p>Trusted by modern teams to deliver product design, branding, and development work that feels premium, clear, and human.</p>
+        </section>
+
+        <section class="projects-grid" id="experience">
+            <div class="project-block">
+                <h3>Google</h3>
+                <span>Full-time UI designer at Google</span>
+                <p>Collaborated with product teams to refine interfaces for key consumer experiences, focusing on clarity and usable motion.</p>
+            </div>
+            <div class="project-block">
+                <h3>Grammarly</h3>
+                <span>Part-time Developer designer at Grammarly</span>
+                <p>Built responsive design systems and microcopy patterns that helped improve readability across web and extension products.</p>
+            </div>
+            <div class="project-block">
+                <h3>Airbnb</h3>
+                <span>Full-time UI designer at Airbnb</span>
+                <p>Shipped polished product pages and onboarding flows with strong emphasis on trust, hospitality, and flexible visuals.</p>
+            </div>
+        </section>
+
+        <section class="contact-panel" id="contact">
+            <div class="form-card">
+                <div class="action-card">
+                    <h2>Wanna see my experience?</h2>
+                    <button type="button" onclick="scrollIntoSection('contact-form')">Book a call</button>
+                </div>
+                <form id="contact-form" onsubmit="submitForm(event)">
+                    <div class="form-row">
+                        <input class="field" type="text" name="name" placeholder="Name" required>
+                        <input class="field" type="email" name="email" placeholder="Email" required>
+                    </div>
+                    <textarea class="message-field" name="message" placeholder="Work Description..." required></textarea>
+                    <div class="submit-row">
+                        <button type="submit">Submit</button>
+                    </div>
+                </form>
+            </div>
+            <div class="social-card">
+                <h3>Let's connect and chat</h3>
+                <div class="social-list" id="social-list"></div>
+            </div>
+        </section>
+
+        <section class="footer-bar">
+            <div class="brand"><span class="brand-icon">A</span>ANSHU</div>
+            <span>&copy; 2024</span>
+            <a class="button-primary" href="#contact">Book a call</a>
+        </section>
+    </main>
+
+    <script>
+        const socialItems = [
+            { label: 'Instagram', url: 'https://www.instagram.com/anshupokharel12?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==', icon: '<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 2H17C20.3137 2 23 4.68629 23 8V16C23 19.3137 20.3137 22 17 22H7C3.68629 22 1 19.3137 1 16V8C1 4.68629 3.68629 2 7 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 12C16 14.2091 14.2091 16 12 16C9.79086 16 8 14.2091 8 12C8 9.79086 9.79086 8 12 8C14.2091 8 16 9.79086 16 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M17.5 6.5H17.51" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>' },
+            { label: 'Facebook', url: 'https://www.facebook.com/anshu.pokharel.752', icon: '<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18 2H6C4.89543 2 4 2.89543 4 4V20C4 21.1046 4.89543 22 6 22H18C19.1046 22 20 21.1046 20 20V4C20 2.89543 19.1046 2 18 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M15 22V14.5H18L18.5 11H15V9.5C15 8.94772 15.4477 8.5 16 8.5H18V5.5H16C13.7909 5.5 12 7.29086 12 9.5V11H9V14.5H12V22H15Z" fill="currentColor"/></svg>' },
+            { label: 'Tiktok', url: 'https://www.tiktok.com/@anshupokhrel11?is_from_webapp=1&sender_device=pc', icon: '<svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M17.617 1.088a.75.75 0 0 0-.873.124 6.134 6.134 0 0 1-2.703 1.581.75.75 0 0 0-.578.717v.702c0 2.447-1.948 4.435-4.348 4.435-2.4 0-4.347-1.988-4.347-4.435 0-2.447 1.948-4.435 4.347-4.435.648 0 1.27.146 1.807.41v-1.52c0-.398.302-.736.709-.8a7.42 7.42 0 0 1 3.889.11.75.75 0 0 0 .995-.56l.217-1.423a.75.75 0 0 0-.593-.86 10.08 10.08 0 0 0-1.919-.17 8.83 8.83 0 0 0-5.107 1.442 9.126 9.126 0 0 0-2.816 3.614A8.906 8.906 0 0 0 2.446 8.76c0 4.695 3.798 8.503 8.495 8.503 4.696 0 8.495-3.808 8.495-8.503V6.613a.75.75 0 0 0-.819-.75 4.558 4.558 0 0 1-1.5-.775zM11.5 22.5c-.42 0-.75-.34-.75-.75v-4.35a.75.75 0 0 1 1.5 0v4.35c0 .41-.34.75-.75.75zm-4-1.5c-.42 0-.75-.34-.75-.75v-2.092a.75.75 0 0 1 1.5 0v2.092c0 .41-.34.75-.75.75zm8 0c-.42 0-.75-.34-.75-.75v-4.5a.75.75 0 0 1 1.5 0v4.5c0 .41-.34.75-.75.75z"/></svg>' },
+            { label: 'LinkedIn', url: 'https://www.linkedin.com/in/anshu-pokhrel-b3552b306/', icon: '<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4.98 3.5C4.98 4.602 4.1 5.5 2.99 5.5C1.89 5.5 1 4.602 1 3.5C1 2.397 1.89 1.5 2.99 1.5C4.1 1.5 4.98 2.397 4.98 3.5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M1 22.5H5.98V8.5H1V22.5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M11.51 8.5H16.4V10.36H16.47C17.2 9.18 18.85 8 20.88 8C24.12 8 24.5 10.2 24.5 13.2V22.5H19.52V14.5C19.52 12.58 19.48 10.22 16.9 10.22C14.3 10.22 14 12.24 14 14.36V22.5H9.02V8.5H11.51Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>' }
+        ];
+
+        const socialList = document.getElementById('social-list');
+
+        socialItems.forEach(item => {
+            const pill = document.createElement('a');
+            pill.className = 'social-pill';
+            pill.href = item.url;
+            pill.target = '_blank';
+            pill.innerHTML = `${item.icon} ${item.label}`;
+            socialList.appendChild(pill);
+        });
+
+        function submitForm(event) {
+            event.preventDefault();
+            const form = event.target;
+            const data = new FormData(form);
+            const name = data.get('name');
+            const email = data.get('email');
+            const message = data.get('message');
+            alert(`Thanks ${name}! Your message has been received.\nWe will reply at ${email}.`);
+            form.reset();
+        }
+
+        function scrollIntoSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+    </script>
+</body>
+</html>
